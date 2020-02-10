@@ -11,7 +11,7 @@
         <td>{{ 'Сумма' }}</td>
         <td><sumres/></td>
       </tr>
-      <tr v-for="(res, name) in resData" :key="name">
+      <tr v-for="res in resData" :key="res.name">
         <td>{{ res.label }}</td>
         <td>{{ res.value }}</td>
       </tr>
@@ -28,7 +28,7 @@ export default {
 		Sumres
   },
   
-  middleware: ['result'],
+  //middleware: ['result'],
 
   computed: {
     ...mapState({

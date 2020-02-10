@@ -1,28 +1,37 @@
 export const state = () => ({
-	formData: {
-    surname: {
+	formData: [
+    {
+      name: 'surname',
       label: 'Фамилия',
       value: ''
     },
-    name: {
+    {
+      name: 'name',
       label: 'Имя',
       value: ''
     },
-    phone: {
+    {
+      name: 'phone',
       label: 'Телефон',
       value: ''
     }
-	}
+	]
 })
 
+export const getters = {
+  getFieldInd: ({formData}) => (name) => formData.findIndex(field => field.name === name),
+  getFieldByName: ({formData},{getFieldInd}) => (name) => formData[getFieldInd(name)],
+}
+
 export const mutations = {
-  changeVal(state,payload) {
-    state.formData[payload.name].value = payload.value;
+  changeValue(state,{ind, value}) {
+    state.formData[ind].value = value;
   }
 }
 
 export const actions = {
-  changeVal(store,payload){
-    store.commit('changeVal', payload);
+  changeVal(store,{name, value}){
+    let ind = store.getters.getFieldInd(name);
+    store.commit('changeValue', {ind, value});
   }
 }
